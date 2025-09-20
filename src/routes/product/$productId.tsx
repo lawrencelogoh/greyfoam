@@ -1,5 +1,12 @@
 import { Link, createFileRoute } from '@tanstack/react-router'
 import { products } from '@/lib/products'
+import { OptionGroupsPanel } from '@/components/ui/OptionGroupsPanel'
+import { BaseCanvas as NimbusFoamPillowCanvas } from '@/components/canvas/NimbusFoamPillow/BaseCanvas'
+import { BaseCanvas as StratusMattressTopperCanvas } from '@/components/canvas/StratusMattressTopper/BaseCanvas'
+import { BaseCanvas as CumulusPlatformBedCanvas } from '@/components/canvas/CumulusPlatformBed/BaseCanvas'
+import { BaseCanvas as CumulusSheetSetCanvas } from '@/components/canvas/CumulusSheetSet/BaseCanvas'
+import { BaseCanvas as ZephyrDuvetInsertCanvas } from '@/components/canvas/ZephyrDuvetInsert/BaseCanvas'
+import { BaseCanvas as StratusStorageCabinetCanvas } from '@/components/canvas/StratusStorageCabinet/BaseCanvas'
 
 export const Route = createFileRoute('/product/$productId')({
   component: ProductPage,
@@ -23,63 +30,46 @@ function ProductPage() {
     )
   }
 
+  const Canvas = getCanvasForProduct(product.id)
+
   return (
-    <main className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
-      <div className="grid gap-8 lg:grid-cols-2">
-        <div className="overflow-hidden rounded-2xl border border-slate-200">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="h-full w-full object-cover"
-          />
-        </div>
+    <div>
+      {/* Fullscreen Canvas Background */}
+      <Canvas />
 
-        <div>
-          <Link to="/" className="text-sm text-slate-600 hover:text-slate-900">← Back</Link>
-          <h1 className="mt-2 text-3xl font-bold text-slate-900">{product.name}</h1>
-          <p className="mt-2 text-slate-600">{product.blurb}</p>
-          <div className="mt-4 text-xl font-semibold">{product.price}</div>
-
-          {/* Configurator scaffolding */}
-          <div className="mt-8 space-y-6">
-            {product.optionGroups.map((group) => (
-              <div key={group.name} className="rounded-xl border border-slate-200 bg-white p-5">
-                <h3 className="text-sm font-semibold text-slate-900">{group.name}</h3>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {group.options.map((opt) => (
-                    <button
-                      key={opt.value}
-                      type="button"
-                      className={
-                        group.type === 'swatch'
-                          ? 'h-9 w-9 rounded-full border border-slate-300 bg-slate-50 text-[0] hover:ring-2 hover:ring-slate-300'
-                          : 'rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50'
-                      }
-                      title={`${group.name}: ${opt.label}`}
-                      aria-label={`${group.name}: ${opt.label}`}
-                    >
-                      {group.type === 'swatch' ? '' : opt.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <button className="inline-flex items-center rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white hover:bg-slate-800">
-              Add to cart
-            </button>
-            <Link
-              to="/"
-              hash="products"
-              className="inline-flex items-center rounded-full border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-            >
-              Continue shopping
+      {/* Floating Sidebar - vertically centered */}
+      <aside className="fixed right-4 top-1/2 -translate-y-1/2 z-10 w-[min(420px,90vw)]">
+        <OptionGroupsPanel product={product} />
+        <div className="mt-3 flex items-center justify-between text-xs text-slate-600">
+          <span>
+            <Link to="/" className="hover:underline">
+              ← Back
             </Link>
-          </div>
+          </span>
+          <Link to="/" hash="products" className="hover:underline">
+            Continue shopping
+          </Link>
         </div>
-      </div>
-    </main>
+      </aside>
+    </div>
   )
+}
+
+function getCanvasForProduct(productId: string) {
+  switch (productId) {
+    case 'p1':
+      return NimbusFoamPillowCanvas
+    case 'p2':
+      return StratusMattressTopperCanvas
+    case 'p3':
+      return CumulusPlatformBedCanvas
+    case 'p4':
+      return CumulusSheetSetCanvas
+    case 'p5':
+      return ZephyrDuvetInsertCanvas
+    case 'p6':
+      return StratusStorageCabinetCanvas
+    default:
+      return NimbusFoamPillowCanvas
+  }
 }
