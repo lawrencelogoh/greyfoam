@@ -13,6 +13,8 @@
     "check": "prettier --write . && eslint --fix"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.6",
+    "@react-three/fiber": "^9.3.0",
     "@tailwindcss/vite": "^4.0.6",
     "@tanstack/react-devtools": "^0.2.2",
     "@tanstack/react-query": "^5.66.5",
@@ -24,6 +26,7 @@
     "@tanstack/react-store": "^0.7.0",
     "@tanstack/router-plugin": "^1.121.2",
     "@tanstack/store": "^0.7.0",
+    "@types/three": "^0.180.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.476.0",
@@ -31,6 +34,7 @@
     "react-dom": "^19.0.0",
     "tailwind-merge": "^3.0.2",
     "tailwindcss": "^4.0.6",
+    "three": "^0.180.0",
     "tw-animate-css": "^1.3.6",
     "vite-tsconfig-paths": "^5.1.4"
   },
