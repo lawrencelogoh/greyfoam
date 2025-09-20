@@ -1,5 +1,3 @@
-# Greyfoam Furniture Website
-
 # Greyfoam Website
 
 A modern e-commerce portfolio project for a fictitious furniture company
