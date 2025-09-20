@@ -1,0 +1,23 @@
+# General Code Style & Formatting
+- Follow the Airbnb Style Guide for code formatting.
+- Use PascalCase for React component file names (e.g., UserCard.tsx, not user-card.tsx).
+- Prefer named exports for components.
+
+# Project Structure & Architecture
+- Follow TanStack Start patterns for routing, layouts, and file organization.
+- Correctly determine when to use server vs. client components in the app.
+
+# Styling & UI
+- Use Tailwind CSS for styling.
+- Use Shadcn UI for components.
+
+# Data Fetching & Forms
+- Use TanStack Query (via TanStack Start) for frontend and server data fetching.
+- Use React Hook Form for form handling.
+- Use Zod for validation.
+
+# State Management & Logic
+- Use TanStack Store for application-level state management.
+
+# Backend & Database
+- Use Drizzle ORM for database access and schema management.
