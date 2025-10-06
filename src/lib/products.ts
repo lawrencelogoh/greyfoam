@@ -20,6 +20,7 @@ export type Product = {
   blurb: string
   optionGroups: OptionGroup[]
   onOptionSelect?: (groupName: string, optionValue: string) => void
+  getSelectedValue?: (groupName: string) => string | undefined
 }
 
 export const products: Product[] = [
@@ -40,26 +41,32 @@ export const products: Product[] = [
 	  { value: 'velvet', label: 'Velvet' },
         ],
       },
-{
-  name: 'Cover Color',
-  type: 'swatch',
-  options: [
-    { value: '#FFFFFF', label: 'White' },
-    { value: '#2F2F2F', label: 'Charcoal' },
-    { value: '#C8B7A6', label: 'Taupe' },
-    { value: '#8B5E3C', label: 'Cocoa' },
-    { value: '#B4C6A6', label: 'Sage' },
-    { value: '#A7C7E7', label: 'Sky' },
-    { value: '#D8A39D', label: 'Blush' },
-    { value: '#8C9DAF', label: 'Steel Blue' },
-  ],
-}
+      {
+	name: 'Cover Color',
+	type: 'swatch',
+	options: [
+	  { value: '#FFFFFF', label: 'White' },
+	  { value: '#2F2F2F', label: 'Charcoal' },
+	  { value: '#C8B7A6', label: 'Taupe' },
+	  { value: '#8B5E3C', label: 'Cocoa' },
+	  { value: '#B4C6A6', label: 'Sage' },
+	  { value: '#A7C7E7', label: 'Sky' },
+	  { value: '#D8A39D', label: 'Blush' },
+	  { value: '#8C9DAF', label: 'Steel Blue' },
+	],
+      }
     ],
     onOptionSelect: (group, value) => {
       const { setColor, setMaterial } = usePillowStore.getState()
       if (group === 'Cover Color') setColor(value)
       if (group === 'Material') setMaterial(value)
-    }
+    },
+    getSelectedValue: (groupName) => {
+      const { color, material } = usePillowStore.getState()
+      if (groupName === 'Cover Color') return color
+      if (groupName === 'Material') return material
+      return undefined
+    },
   },
   {
     id: 'p2',

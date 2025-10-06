@@ -10,7 +10,7 @@ interface PillowState {
 }
 
 export const usePillowStore = create<PillowState>((set) => ({
-  color: '#ffffff',       // default white
+  color: '#FFFFFF',       // default white
   material: 'cotton',     // default material
   setColor: (color) => set({ color }),
   setMaterial: (material) => set({ material }),
