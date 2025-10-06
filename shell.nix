@@ -4,7 +4,7 @@ pkgs.mkShell {
 
   buildInputs = [
     pkgs.bun
-    pkgs.nodjs
+    pkgs.nodejs
   ];
 
 }

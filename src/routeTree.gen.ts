@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TestRouteImport } from './routes/test'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductProductIdRouteImport } from './routes/product/$productId'
 
+const TestRoute = TestRouteImport.update({
+  id: '/test',
+  path: '/test',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -25,32 +31,43 @@ const ProductProductIdRoute = ProductProductIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/test': typeof TestRoute
   '/product/$productId': typeof ProductProductIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/test': typeof TestRoute
   '/product/$productId': typeof ProductProductIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/test': typeof TestRoute
   '/product/$productId': typeof ProductProductIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/product/$productId'
+  fullPaths: '/' | '/test' | '/product/$productId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/product/$productId'
-  id: '__root__' | '/' | '/product/$productId'
+  to: '/' | '/test' | '/product/$productId'
+  id: '__root__' | '/' | '/test' | '/product/$productId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  TestRoute: typeof TestRoute
   ProductProductIdRoute: typeof ProductProductIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/test': {
+      id: '/test'
+      path: '/test'
+      fullPath: '/test'
+      preLoaderRoute: typeof TestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  TestRoute: TestRoute,
   ProductProductIdRoute: ProductProductIdRoute,
 }
 export const routeTree = rootRouteImport
