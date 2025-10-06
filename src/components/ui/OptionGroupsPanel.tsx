@@ -10,18 +10,28 @@ export function OptionGroupsPanel({ product }: { product: Product }) {
       <div className="mt-6 space-y-5">
         {product.optionGroups.map((group) => (
           <div key={group.name}>
-            <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-700">{group.name}</h3>
+            <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-700">
+              {group.name}
+            </h3>
             <div className="mt-2 flex flex-wrap gap-2">
               {group.options.map((opt) => (
                 <button
                   key={opt.value}
                   type="button"
+                  onClick={() =>
+                    product.onOptionSelect?.(group.name, opt.value)
+                  }
                   className={
                     group.type === 'swatch'
-                      ? 'h-8 w-8 rounded-full border border-slate-300 bg-slate-50 text-[0] hover:ring-2 hover:ring-slate-300'
+                      ? 'h-8 w-8 rounded-full border border-slate-300 text-[0] hover:ring-2 hover:ring-slate-300'
                       : 'rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50'
                   }
-                  title={`${group.name}: ${opt.label}`}
+                  style={
+                    group.type === 'swatch'
+                      ? { backgroundColor: opt.value }
+                      : {}
+                  }
+                  title={`${opt.label}`}
                   aria-label={`${group.name}: ${opt.label}`}
                 >
                   {group.type === 'swatch' ? '' : opt.label}

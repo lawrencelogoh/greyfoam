@@ -1,3 +1,5 @@
+import { usePillowStore } from '@/stores/usePillowStore'
+
 export type Option = {
   value: string
   label: string
@@ -7,6 +9,7 @@ export type OptionGroup = {
   name: string
   type: 'select' | 'swatch' | 'radio'
   options: Option[]
+  
 }
 
 export type Product = {
@@ -16,6 +19,7 @@ export type Product = {
   image: string
   blurb: string
   optionGroups: OptionGroup[]
+  onOptionSelect?: (groupName: string, optionValue: string) => void
 }
 
 export const products: Product[] = [
@@ -27,32 +31,35 @@ export const products: Product[] = [
     blurb: 'Ergonomic support with breathable cooling layers.',
     optionGroups: [
       {
-        name: 'Size',
+        name: 'Material',
         type: 'radio',
         options: [
-          { value: 'standard', label: 'Standard' },
-          { value: 'king', label: 'King' },
+          { value: 'cotton', label: 'Cotton' },
+          { value: 'silk', label: 'Silk' },
+          { value: 'leather', label: 'Leather' },
+	  { value: 'velvet', label: 'Velvet' },
         ],
       },
-      {
-        name: 'Firmness',
-        type: 'radio',
-        options: [
-          { value: 'soft', label: 'Soft' },
-          { value: 'medium', label: 'Medium' },
-          { value: 'firm', label: 'Firm' },
-        ],
-      },
-      {
-        name: 'Cover Color',
-        type: 'swatch',
-        options: [
-          { value: 'white', label: 'White' },
-          { value: 'charcoal', label: 'Charcoal' },
-          { value: 'sand', label: 'Sand' },
-        ],
-      },
+{
+  name: 'Cover Color',
+  type: 'swatch',
+  options: [
+    { value: '#FFFFFF', label: 'White' },
+    { value: '#2F2F2F', label: 'Charcoal' },
+    { value: '#C8B7A6', label: 'Taupe' },
+    { value: '#8B5E3C', label: 'Cocoa' },
+    { value: '#B4C6A6', label: 'Sage' },
+    { value: '#A7C7E7', label: 'Sky' },
+    { value: '#D8A39D', label: 'Blush' },
+    { value: '#8C9DAF', label: 'Steel Blue' },
+  ],
+}
     ],
+    onOptionSelect: (group, value) => {
+      const { setColor, setMaterial } = usePillowStore.getState()
+      if (group === 'Cover Color') setColor(value)
+      if (group === 'Material') setMaterial(value)
+    }
   },
   {
     id: 'p2',
