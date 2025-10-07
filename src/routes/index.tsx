@@ -136,26 +136,6 @@ function App() {
           ))}
         </div>
       </section>
-
-      {/* CTA */}
-      <section
-        id="contact"
-        className="my-16 overflow-hidden rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm"
-      >
-        <h3 className="text-xl font-semibold">Build your better bedtime</h3>
-        <p className="mx-auto mt-2 max-w-2xl text-sm text-slate-600">
-          Mix and match pillows, sheets, and toppers to create your ideal sleep
-          setup. Free shipping over $100.
-        </p>
-        <div className="mt-6">
-          <a
-            href="#products"
-            className="inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800"
-          >
-            Explore the collection
-          </a>
-        </div>
-      </section>
     </main>
   )
 }
