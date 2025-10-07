@@ -12,7 +12,7 @@ export function Pillow() {
       child.material.color.set(color)
 
       if (materialType === 'cotton') {
-        child.material.roughness = 0.85 // matte but not as extreme as velvet
+        child.material.roughness = 0.7 // matte but not as extreme as velvet
         child.material.metalness = 0.0
       } else if (materialType === 'silk') {
         child.material.roughness = 0.25 // smoother than cotton

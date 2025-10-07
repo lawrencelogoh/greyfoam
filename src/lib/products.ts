@@ -28,7 +28,7 @@ export const products: Product[] = [
     id: 'p1',
     name: 'Nimbus Foam Pillow',
     price: '$79',
-    image: 'https://source.unsplash.com/random/600x600?sig=11&pillows',
+    image: '/images/nimbus-pillow.png',
     blurb: 'Ergonomic support with breathable cooling layers.',
     optionGroups: [
       {
@@ -72,7 +72,7 @@ export const products: Product[] = [
     id: 'p2',
     name: 'Stratus Mattress Topper',
     price: '$149',
-    image: 'https://source.unsplash.com/random/600x600?sig=12&bedroom',
+    image: '/images/under-development.png',
     blurb: 'Plush comfort that refreshes any mattress.',
     optionGroups: [
       {
@@ -110,7 +110,7 @@ export const products: Product[] = [
     id: 'p3',
     name: 'Cumulus Platform Bed',
     price: '$899',
-    image: 'https://source.unsplash.com/random/600x600?sig=103&bed,furniture',
+    image: '/images/under-development.png',
     blurb: 'Minimal platform bed with configurable size, finish, and headboard.',
     optionGroups: [
       {
@@ -156,7 +156,7 @@ export const products: Product[] = [
     id: 'p4',
     name: 'Cumulus Sheet Set',
     price: '$129',
-    image: 'https://source.unsplash.com/random/600x600?sig=14&sheets',
+    image: '/images/under-development.png',
     blurb: 'Crisp, breathable weave with a silky touch.',
     optionGroups: [
       {
@@ -194,7 +194,7 @@ export const products: Product[] = [
     id: 'p5',
     name: 'Zephyr Duvet Insert',
     price: '$199',
-    image: 'https://source.unsplash.com/random/600x600?sig=15&duvet',
+    image: '/images/under-development.png',
     blurb: 'All-season loft with temperature balance.',
     optionGroups: [
       {
@@ -229,7 +229,7 @@ export const products: Product[] = [
     id: 'p6',
     name: 'Stratus Storage Cabinet',
     price: '$749',
-    image: 'https://source.unsplash.com/random/600x600?sig=106&cabinet,furniture',
+    image: '/images/under-development.png',
     blurb: 'Modular cabinet with adjustable shelves and customizable fronts.',
     optionGroups: [
       {
