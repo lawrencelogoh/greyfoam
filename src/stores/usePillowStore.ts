@@ -7,11 +7,15 @@ interface PillowState {
   material: MaterialType
   setColor: (color: string) => void
   setMaterial: (material: MaterialType) => void
+  image: string
+  setImage: (image: string) => void
 }
 
 export const usePillowStore = create<PillowState>((set) => ({
+  image: null,
   color: '#FFFFFF',       // default white
   material: 'cotton',     // default material
   setColor: (color) => set({ color }),
   setMaterial: (material) => set({ material }),
+  setImage: (image) => set({ image }),
 }))

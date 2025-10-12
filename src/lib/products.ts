@@ -7,7 +7,7 @@ export type Option = {
 
 export type OptionGroup = {
   name: string
-  type: 'select' | 'swatch' | 'radio'
+  type: 'select' | 'swatch' | 'radio' | 'upload'
   options: Option[]
   
 }
@@ -54,8 +54,16 @@ export const products: Product[] = [
 	  { value: '#D8A39D', label: 'Blush' },
 	  { value: '#8C9DAF', label: 'Steel Blue' },
 	],
+      },
+      {
+	name: 'Custom Pattern',
+	type: 'upload',
+	options: [],
+	
       }
     ],
+    
+    
     onOptionSelect: (group, value) => {
       const { setColor, setMaterial } = usePillowStore.getState()
       if (group === 'Cover Color') setColor(value)

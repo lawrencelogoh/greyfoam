@@ -1,11 +1,12 @@
 import { useGLTF } from '@react-three/drei'
-
+import * as THREE from 'three'
 import { usePillowStore } from '@/stores/usePillowStore'
 
 export function Pillow() {
   const { scene } = useGLTF('/models/pillow.glb')
   const color = usePillowStore((s) => s.color)
   const materialType = usePillowStore((s) => s.material)
+  const image = usePillowStore((s) => s.image)
 
   scene.traverse((child) => {
     if (child.isMesh) {
@@ -23,6 +24,21 @@ export function Pillow() {
       } else if (materialType === 'velvet') {
         child.material.roughness = 0.95 // very matte
         child.material.metalness = 0.0
+      }
+
+      // load image if it exists
+      if (image) {
+        const loader = new THREE.TextureLoader()
+
+        loader.load(image, (texture) => {
+          child.material.map = texture
+          child.material.color.set('#FFFFFF') // prevent tint
+          child.material.needsUpdate = true
+        })
+      } else {
+        child.material.color.set(color) // restore color
+        child.material.map = null
+        child.material.needsUpdate = true
       }
     }
   })
