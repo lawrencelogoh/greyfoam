@@ -1,18 +1,15 @@
 import type { Product } from '@/lib/products'
 import { usePillowStore } from '@/stores/usePillowStore'
+import { useRef } from 'react'
 
 function UploadOption() {
   const image = usePillowStore((s) => s.image)
   const setImage = usePillowStore((s) => s.setImage)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
-
-    // Option 1: Fast preview with object URL
-    // const url = URL.createObjectURL(file)
-    // setImage(url)
-
 
     const reader = new FileReader()
     reader.onload = () => setImage(reader.result as string)
@@ -21,23 +18,33 @@ function UploadOption() {
 
   return (
     <div className="flex flex-col gap-2">
-      <label className="flex items-center gap-2 rounded-full border border-slate-300 px-3 py-1.5 text-xs font-medium bg-white hover:bg-slate-50 cursor-pointer">
-        Upload Image
-        <input type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
-      </label>
-
-      {image && (
-        <div className="mt-2">
-          <img src={image} alt="Preview" className="h-16 w-16 rounded object-cover border" />
+      {image ? (
+        <div className="relative w-[200px] h-[200px]">
+          <img
+            src={image}
+            alt="Uploaded"
+            className="w-full h-full object-cover rounded cursor-pointer border"
+            onClick={() => inputRef.current?.click()}
+          />
           <button
             type="button"
             onClick={() => setImage("")}
-            className="mt-1 text-xs text-red-500 hover:underline"
+            className="absolute top-1 right-1 bg-white/80 text-red-500 text-xs px-2 py-1 rounded"
           >
             Remove
           </button>
         </div>
+      ) : (
+        <img
+          src="/images/upload.png"
+          alt="upload image"
+          className="cursor-pointer"
+          width={200}
+          onClick={() => inputRef.current?.click()}
+        />
       )}
+
+      <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
     </div>
   )
 }
